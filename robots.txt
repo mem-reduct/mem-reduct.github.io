@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&yclid&gclid
+Sitemap: https://mem-reduct.github.io/sitemap.xml

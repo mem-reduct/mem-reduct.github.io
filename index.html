@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RAM BOOST — бесплатная программа для очистки и оптимизации оперативной памяти. Освободите до 17 ГБ одним кликом. Без рекламы.">
+<meta name="keywords" content="ram cleaner, очистка оперативной памяти, ускорить компьютер, оптимизация ram">
+<meta property="og:title" content="RAM BOOST — Освободи свою память">
+<meta property="og:description" content="До 17 ГБ свободной RAM одним кликом. Бесплатно, без рекламы.">
+<meta property="og:type" content="website">
+<title>RAM BOOST — Освободи свою память. Ускорь свою систему.</title>
+<!-- Кастомный favicon (зелёная молния на тёмном) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a0e14'/%3E%3Cpolygon points='13 3 5 14 11 14 10 21 19 10 13 10' fill='%2300ff88'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e14;--bg2:#0d1320;--card:rgba(255,255,255,.03);
+  --border:rgba(255,255,255,.08);
+  --green:#00ff88;--cyan:#00d4ff;
+  --green-glow:rgba(0,255,136,.35);--cyan-glow:rgba(0,212,255,.3);
+  --text:#e8edf2;--dim:#7a8699;
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.g{color:var(--green)}.c{color:var(--cyan)}
+
+/* ══ ИКОНКИ (общие стили) ══ */
+.logo-chip svg{width:16px;height:16px;stroke:#03130c;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.feat-ic{display:inline-flex;margin-bottom:16px}
+.feat-ic svg{width:36px;height:36px;stroke:var(--green);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 12px var(--green-glow))}
+.btn-ic{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px;margin-right:9px}
+.tag-ic{width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:7px}
+.bdg-ic{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1px;margin-right:7px}
+
+/* ══ NAVBAR ══ */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,14,20,.75);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 0}
+.nav-in{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--mono);font-weight:700;font-size:20px;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:10px}
+.logo-chip{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--green),var(--cyan));color:#000;
+  box-shadow:0 0 20px var(--green-glow)}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav a{color:var(--dim);text-decoration:none;font-size:14px;transition:.2s}
+nav a:hover{color:var(--green)}
+
+/* ══ BUTTONS ══ */
+.btn{font-family:var(--mono);font-weight:700;font-size:15px;padding:14px 30px;
+  border-radius:10px;text-decoration:none;cursor:pointer;border:none;transition:.25s;display:inline-block}
+.btn-main{background:linear-gradient(135deg,var(--green),var(--cyan));color:#03130c;
+  box-shadow:0 4px 30px var(--green-glow)}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 10px 44px var(--green-glow)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
+.btn-sm{padding:9px 20px;font-size:13px;border-radius:8px}
+
+/* ══ HERO ══ */
+.hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 70px;position:relative}
+.hero-bg{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,255,136,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,255,136,.04) 1px,transparent 1px);
+  background-size:52px 52px;mask-image:radial-gradient(ellipse at 40% 40%,#000 25%,transparent 75%);
+  animation:gridmove 22s linear infinite}
+@keyframes gridmove{to{background-position:52px 52px}}
+.particle{position:absolute;border-radius:50%;background:var(--green);opacity:.25;
+  filter:blur(1px);animation:float linear infinite}
+@keyframes float{0%{transform:translateY(105vh)}100%{transform:translateY(-10vh)}}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative}
+.hero-badge{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--green);
+  border:1px solid rgba(0,255,136,.3);background:rgba(0,255,136,.06);
+  padding:7px 16px;border-radius:100px;margin-bottom:24px;letter-spacing:1px}
+h1{font-size:clamp(40px,6vw,72px);font-weight:800;line-height:1.08;letter-spacing:-1.5px}
+.hero-sub{color:var(--dim);font-size:18px;max-width:520px;margin:24px 0 34px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ══ RAM GAUGE ══ */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;gap:20px}
+.gauge-card{background:var(--card);border:1px solid var(--border);border-radius:22px;
+  padding:40px;backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;gap:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.gauge-box{position:relative;width:250px;height:250px}
+.gauge-box svg{transform:rotate(-90deg)}
+.g-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:16}
+.g-val{fill:none;stroke:url(#grad);stroke-width:16;stroke-linecap:round;
+  transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1),filter .4s}
+.gauge-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge-num b{font-family:var(--mono);font-size:52px;font-weight:700;
+  text-shadow:0 0 25px var(--green-glow)}
+.gauge-num span{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:2px}
+.gauge-status{font-family:var(--mono);font-size:13px;color:var(--dim)}
+
+/* ══ MARQUEE ══ */
+.marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  overflow:hidden;padding:16px 0;background:rgba(0,255,136,.02)}
+.mq-track{display:flex;gap:36px;width:max-content;animation:mq 28s linear infinite;
+  font-family:var(--mono);font-size:14px;letter-spacing:3px;color:var(--dim);white-space:nowrap}
+.mq-track .g{color:var(--green)}.mq-track .c{color:var(--cyan)}
+.marquee:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ══ SECTIONS ══ */
+section{padding:96px 0}
+.sec-title{font-family:var(--mono);font-size:clamp(26px,4vw,40px);margin-bottom:52px}
+.sec-title::after{content:'_';color:var(--green);animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ══ STATS ══ */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-num{font-family:var(--mono);font-size:42px;font-weight:700;
+  background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.stat-label{color:var(--dim);font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin-top:6px}
+
+/* ══ FEATURES ══ */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:30px;backdrop-filter:blur(8px);transition:.3s;position:relative}
+.feat:hover{transform:translateY(-6px);border-color:rgba(0,255,136,.4);
+  box-shadow:0 16px 44px rgba(0,0,0,.5),0 0 30px rgba(0,255,136,.08)}
+.feat h3{font-size:18px;margin-bottom:10px}
+.feat p{color:var(--dim);font-size:14.5px}
+
+/* ══ HOW IT WORKS ══ */
+.how-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+.step{display:flex;gap:24px;padding:26px 0;border-left:2px solid var(--border);padding-left:28px;position:relative}
+.step-n{font-family:var(--mono);font-size:44px;font-weight:700;color:transparent;
+  -webkit-text-stroke:1.5px var(--green);opacity:.7;line-height:1;flex-shrink:0}
+.step h3{margin-bottom:8px;font-size:18px}
+.step p{color:var(--dim);font-size:14.5px}
+.terminal{background:#02060a;border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.6),0 0 50px rgba(0,255,136,.05)}
+.term-head{display:flex;align-items:center;gap:8px;background:#0a1018;padding:12px 16px;border-bottom:1px solid var(--border)}
+.dot{width:12px;height:12px;border-radius:50%}
+.term-title{margin-left:10px;font-family:var(--mono);font-size:13px;color:var(--dim)}
+.term-body{font-family:var(--mono);font-size:13.5px;padding:22px;min-height:230px;color:#9fb3c8}
+.tl{margin-bottom:6px;white-space:pre-wrap}
+.tl .ok{color:var(--green)}.tl .cy{color:var(--cyan)}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--green);animation:blink 1s step-end infinite;vertical-align:middle}
+.run-btn{margin-top:20px}
+
+/* ══ COMPARE ══ */
+.cmp{max-width:760px;margin:0 auto;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.cmp-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.cmp-row:last-child{border-bottom:none}
+.cmp-row>div{padding:18px 24px;font-size:15px}
+.cmp-head{background:rgba(0,255,136,.05);font-family:var(--mono);font-size:13px;
+  text-transform:uppercase;letter-spacing:1px;color:var(--dim)}
+.before{color:var(--dim)}.after{color:var(--green);font-family:var(--mono);font-weight:700}
+
+/* ══ DOWNLOAD ══ */
+.dl-card{background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,212,255,.06));
+  border:1px solid rgba(0,255,136,.25);border-radius:22px;padding:56px;text-align:center;
+  box-shadow:0 0 60px rgba(0,255,136,.07)}
+.dl-ver{font-family:var(--mono);color:var(--green);margin:10px 0 4px}
+.dl-size{color:var(--dim);font-size:14px;margin-bottom:30px}
+.dl-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
+.dl-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.dl-tags span{font-family:var(--mono);font-size:12px;border:1px solid var(--border);
+  border-radius:100px;padding:5px 14px;color:var(--dim)}
+
+/* ══ FAQ ══ */
+.faq{max-width:760px;margin:0 auto}
+.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;
+  overflow:hidden;transition:.3s;background:var(--card)}
+.faq-item.open{border-color:rgba(0,255,136,.35)}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--sans);
+  font-size:16px;font-weight:600;text-align:left;padding:20px 24px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q .arr{color:var(--green);transition:.3s;font-family:var(--mono)}
+.faq-item.open .arr{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a p{padding:0 24px 20px;color:var(--dim);font-size:14.5px}
+
+/* ══ FOOTER ══ */
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--dim);font-size:14px}
+footer .logo{justify-content:center;margin-bottom:14px}
+
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s}
+.reveal.vis{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero-grid,.how-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:32px}
+  nav ul li:not(:last-child){display:none}
+}
+@media(max-width:560px){.feat-grid{grid-template-columns:1fr}.cmp-row{grid-template-columns:1.2fr 1fr 1fr}.cmp-row>div{padding:12px;font-size:13px}}
+</style>
+</head>
+<body>
+
+<nav><div class="container nav-in">
+  <a class="logo" href="#"><span class="logo-chip"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>RAM<span class="g">BOOST</span></a>
+  <ul>
+    <li><a href="#features">Возможности</a></li>
+    <li><a href="#how">Как работает</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#download" class="btn btn-main btn-sm">Скачать</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge"><svg class="bdg-ic" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>2.5М СКАЧИВАНИЙ · OPEN SOURCE · БЕЗ РЕКЛАМЫ</div>
+      <h1>Освободи свою <span class="g">память</span>.<br>Ускорь свою <span class="c">систему</span>.</h1>
+      <p class="hero-sub">RAM BOOST находит «утечки» памяти и зависшие процессы, освобождая до 17 ГБ RAM одним кликом. Игры грузятся быстрее, система перестаёт фризить.</p>
+      <div class="hero-btns">
+        <a href="#download" class="btn btn-main"><svg class="btn-ic" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Скачать для Windows</a>
+        <a href="#how" class="btn btn-ghost">Как это работает<svg class="btn-ic" viewBox="0 0 24 24" style="margin-right:0;margin-left:9px"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
+      </div>
+    </div>
+    <div class="gauge-wrap">
+      <div class="gauge-card">
+        <div class="gauge-box">
+          <svg width="250" height="250">
+            <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00ff88"/><stop offset="100%" stop-color="#00d4ff"/>
+            </linearGradient></defs>
+            <circle class="g-bg" cx="125" cy="125" r="106"/>
+            <circle class="g-val" id="gauge" cx="125" cy="125" r="106"
+              stroke-dasharray="666" stroke-dashoffset="666"/>
+          </svg>
+          <div class="gauge-num"><b id="ramNum">0%</b><span>RAM занято</span></div>
+        </div>
+        <div class="gauge-status" id="gaugeStatus">Состояние: перегрузка памяти</div>
+        <button class="btn btn-main" id="cleanBtn" onclick="cleanRam()"><svg class="btn-ic" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>Очистить память</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee"><div class="mq-track" id="mq"></div></div>
+
+<section><div class="container stats-grid">
+  <div class="stat reveal"><div class="stat-num" data-t="2500000" data-suf="+">0</div><div class="stat-label">пользователей</div></div>
+  <div class="stat reveal"><div class="stat-num" data-t="17" data-suf=" ГБ">0</div><div class="stat-label">среднее освобождение</div></div>
+  <div class="stat reveal"><div class="stat-num" data-t="4.9" data-dec="1" data-suf="★">0</div><div class="stat-label">рейтинг</div></div>
+  <div class="stat reveal"><div class="stat-num" data-t="48" data-pre="<" data-suf=" МБ">0</div><div class="stat-label">вес программы</div></div>
+</div></section>
+
+<section id="features"><div class="container">
+  <h2 class="sec-title">// ВОЗМОЖНОСТИ</h2>
+  <div class="feat-grid">
+    <div class="feat reveal">
+      <span class="feat-ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+      <h3>Мгновенная очистка</h3><p>Одним кликом освобождает память, занятую кэшем и зависшими процессами. Без перезагрузки.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>
+      <h3>Умный алгоритм</h3><p>Находит утечки памяти и приложения-пожиратели, которые обычный диспетчер задач не показывает.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ic"><svg viewBox="0 0 24 24"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><path d="M17.3 5H6.7a4 4 0 0 0-4 3.6C2.6 9.4 2 14.5 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.4-1.4a2 2 0 0 1 1.4-.6h4.4a2 2 0 0 1 1.4.6L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.5-.6-6.6-.7-7.4a4 4 0 0 0-4-3.6z"/></svg></span>
+      <h3>Игровой режим</h3><p>Автоматически чистит RAM перед запуском игры — fps выше, фризов меньше.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+      <h3>Мониторинг в реальном времени</h3><p>Живой график использования памяти в трее. Видно, кто и сколько ест.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></span>
+      <h3>Автопилот</h3><p>Работает в фоне и чистит память сам, когда загрузка превышает порог.</p>
+    </div>
+    <div class="feat reveal">
+      <span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 8.9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <h3>Без рекламы и слежки</h3><p>Никаких баннеров, телеметрии и «дополнительных предложений». Только чистка.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="how" style="background:#0d1320;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="container">
+  <h2 class="sec-title">// КАК ЭТО РАБОТАЕТ</h2>
+  <div class="how-grid">
+    <div>
+      <div class="step reveal"><div class="step-n">01</div><div><h3>Скан</h3><p>Программа анализирует все процессы и находит «мёртвую» память: кэш, утечки, зависшие службы.</p></div></div>
+      <div class="step reveal"><div class="step-n">02</div><div><h3>Анализ</h3><p>Оценивает, что можно безопасно освободить, не сломав работу системы и открытых программ.</p></div></div>
+      <div class="step reveal"><div class="step-n">03</div><div><h3>Очистка</h3><p>Освобождает память за секунды. Система сразу откликается быстрее — проверь сам.</p></div></div>
+    </div>
+    <div>
+      <div class="terminal">
+        <div class="term-head"><span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span><span class="term-title">ramboost — cli</span></div>
+        <div class="term-body" id="term"><div class="tl">$ <span class="ok">ramboost --scan</span><span class="cursor"></span></div></div>
+      </div>
+      <button class="btn btn-ghost run-btn" onclick="runTerm()"><svg class="btn-ic" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><polygon points="6 4 20 12 6 20"/></svg>Запустить симуляцию</button>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="container">
+  <h2 class="sec-title">// ДО И ПОСЛЕ</h2>
+  <div class="cmp reveal">
+    <div class="cmp-row cmp-head"><div>Метрика</div><div>Без RAM BOOST</div><div>С RAM BOOST</div></div>
+    <div class="cmp-row"><div>Загрузка игр</div><div class="before">62 сек</div><div class="after">38 сек</div></div>
+    <div class="cmp-row"><div>Отклик системы</div><div class="before">~800 мс</div><div class="after">~90 мс</div></div>
+    <div class="cmp-row"><div>Фризы за час игры</div><div class="before">12–17</div><div class="after">0–1</div></div>
+    <div class="cmp-row"><div>Свободно RAM</div><div class="before">1.2 ГБ</div><div class="after">8.5 ГБ</div></div>
+  </div>
+</div></section>
+
+<section id="download"><div class="container">
+  <div class="dl-card reveal">
+    <h2 class="sec-title" style="margin-bottom:8px">// СКАЧАТЬ RAM BOOST</h2>
+    <div class="dl-ver">v3.2.0 · стабильная</div>
+    <div class="dl-size">Размер: 48 МБ · Обновлено: октябрь 2026</div>
+    <div class="dl-btns">
+      <a class="btn btn-main" href="#"><svg class="btn-ic" viewBox="0 0 24 24"><rect x="3" y="3" width="8.5" height="8.5" rx="1" fill="currentColor" stroke="none"/><rect x="12.5" y="3" width="8.5" height="8.5" rx="1" fill="currentColor" stroke="none"/><rect x="3" y="12.5" width="8.5" height="8.5" rx="1" fill="currentColor" stroke="none"/><rect x="12.5" y="12.5" width="8.5" height="8.5" rx="1" fill="currentColor" stroke="none"/></svg>Windows</a>
+      <a class="btn btn-ghost" href="#"><svg class="btn-ic" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>Linux</a>
+      <a class="btn btn-ghost" href="#"><svg class="btn-ic" viewBox="0 0 24 24"><path d="M12 20.9c1.5 0 2.7 1.1 4 1.1 3 0 6-8 6-12.2A4.9 4.9 0 0 0 17 5c-2.2 0-4 1.4-5 2-1-.6-2.8-2-5-2a4.9 4.9 0 0 0-5 4.8C2 14 5 22 8 22c1.3 0 2.5-1.1 4-1.1Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>macOS</a>
+    </div>
+    <div class="dl-tags">
+      <span><svg class="tag-ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% бесплатно</span>
+      <span><svg class="tag-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.7 5.7 12.6 12.6"/></svg>Без рекламы</span>
+      <span><svg class="tag-ic" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.8-1.3"/></svg>Open Source</span>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq" style="background:#0d1320;border-top:1px solid var(--border)"><div class="container">
+  <h2 class="sec-title">// FAQ</h2>
+  <div class="faq">
+    <div class="faq-item"><button class="faq-q">Это безопасно для системы?<span class="arr">+</span></button>
+      <div class="faq-a"><p>Да. RAM BOOST использует только официальные API Windows и никогда не завершает критические системные процессы. Перед очисткой каждый процесс проверяется по белому списку.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Чем это лучше бесплатной очистки через диспетчер задач?<span class="arr">+</span></button>
+      <div class="faq-a"><p>Диспетчер показывает только активные процессы. RAM BOOST находит скрытые утечки памяти, освобождает standby-кэш и работает автоматически — вам не нужно ничего делать вручную.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Сколько программа весит и сколько ест памяти сама?<span class="arr">+</span></button>
+      <div class="faq-a"><p>Установщик — 48 МБ. В фоне программа потребляет менее 15 МБ RAM — меньше, чем одна вкладка браузера.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Правда, что это бесплатно? В чём подвох?<span class="arr">+</span></button>
+      <div class="faq-a"><p>Подвоха нет. Проект open source и живёт на пожертвования. Никакой рекламы, сборов данных и платных «PRO-версий».</p></div></div>
+    <div class="faq-item"><button class="faq-q">Работает ли на Windows 10 и 11?<span class="arr">+</span></button>
+      <div class="faq-a"><p>Да, поддерживаются Windows 10/11 (64-bit), а также Linux и macOS. Автообновление встроено.</p></div></div>
+  </div>
+</div></section>
+
+<footer><div class="container">
+  <a class="logo" href="#"><span class="logo-chip"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>RAM<span class="g">BOOST</span></a>
+  <p>© 2026 RAM BOOST · Освободи свою память. Ускорь свою систему.</p>
+</div></footer>
+
+<script>
+/* ═══ ЧАСТИЦЫ ФОНА ═══ */
+for(let i=0;i<18;i++){
+  const p=document.createElement('div');p.className='particle';
+  const s=Math.random()*4+2;
+  p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*14+10}s;animation-delay:-${Math.random()*20}s`;
+  document.querySelector('.hero').appendChild(p);
+}
+
+/* ═══ RAM-ДАТЧИК ═══ */
+const gauge=document.getElementById('gauge'),ramNum=document.getElementById('ramNum'),status=document.getElementById('gaugeStatus');
+const CIRC=2*Math.PI*106;let cur=0,animating=false;
+gauge.style.strokeDasharray=CIRC;
+function drawGauge(){
+  const off=CIRC*(1-cur/100);
+  gauge.style.strokeDashoffset=off;
+  ramNum.textContent=Math.round(cur)+'%';
+  gauge.style.filter=`drop-shadow(0 0 ${cur>60?24:8}px rgba(0,255,136,${cur>60?.6:.25}))`;
+}
+function animTo(to,dur=1600){
+  const from=cur,start=performance.now();animating=true;
+  (function tick(t){
+    const p=Math.min((t-start)/dur,1),e=1-Math.pow(1-p,3);
+    cur=from+(to-from)*e;drawGauge();
+    if(p<1)requestAnimationFrame(tick);else animating=false;
+  })(start);
+}
+setTimeout(()=>{animTo(87);status.textContent='Состояние: перегрузка памяти !';},700);
+function cleanRam(){
+  if(animating)return;
+  status.textContent='Очистка... освобождение памяти';
+  animTo(34,1800);
+  setTimeout(()=>status.textContent='Состояние: оптимально ✓ (освобождено ~6.8 ГБ)',1900);
+}
+drawGauge();
+
+/* ═══ БЕГУЩАЯ СТРОКА ═══ */
+const mqItems=['17 ГБ ОСВОБОЖДЕНО','2.5М СКАЧИВАНИЙ','4.9★ РЕЙТИНГ','0% РЕКЛАМЫ','INSTANT CLEAN','OPEN SOURCE'];
+document.getElementById('mq').innerHTML=[...mqItems,...mqItems,...mqItems,...mqItems]
+  .map(t=>`<span class="g">×</span><span>${t}</span>`).join('');
+
+/* ═══ СЧЁТЧИКИ ═══ */
+const cObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target,t=+el.dataset.t,dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+  const start=performance.now(),dur=1800;
+  (function tick(now){
+    const p=Math.min((now-start)/dur,1),v=t*(1-Math.pow(1-p,3));
+    el.textContent=pre+v.toLocaleString('ru-RU',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;
+    if(p<1)requestAnimationFrame(tick);
+  })(start);
+  cObs.unobserve(el);
+}),{threshold:.5});
+document.querySelectorAll('.stat-num').forEach(el=>cObs.observe(el));
+
+/* ═══ REVEAL ═══ */
+const rObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('vis');rObs.unobserve(e.target);}
+}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
+
+/* ═══ ТЕРМИНАЛ ═══ */
+const termLines=[
+  ['[SCAN] Analyzing 214 processes...',''],
+  ['[SCAN] Memory leaks found: 4.2 GB','cy'],
+  ['[SCAN] Standby cache: 2.6 GB','cy'],
+  ['[CLEAN] Freeing cached data... done','ok'],
+  ['[CLEAN] Terminating 3 zombie processes... done','ok'],
+  ['[+] RAM usage: 87% → 34% (freed 6.8 GB)','ok'],
+  ['[✓] Done in 2.4s. System response: optimal','ok'],
+];
+let termBusy=false;
+function runTerm(){
+  if(termBusy)return;termBusy=true;
+  const t=document.getElementById('term');
+  t.innerHTML='<div class="tl">$ <span style="color:#00ff88">ramboost --scan --clean</span></div>';
+  let i=0;
+  const iv=setInterval(()=>{
+    if(i>=termLines.length){clearInterval(iv);termBusy=false;return;}
+    const[txt,cls]=termLines[i++];
+    const d=document.createElement('div');d.className='tl';
+    d.innerHTML=cls?`<span class="${cls}">${txt}</span>`:txt;
+    t.appendChild(d);
+  },420);
+}
+
+/* ═══ FAQ ═══ */
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{
+  const item=q.parentElement,a=item.querySelector('.faq-a'),open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>{f.classList.remove('open');f.querySelector('.faq-a').style.maxHeight=null;});
+  if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+}));
+</script>
+</body>
+</html>
